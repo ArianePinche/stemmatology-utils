@@ -13,7 +13,7 @@ as csv.
 The stylesheet as three parameters:
 
 1. `appTypes`: a sequence of strings containing the `app/@type` to be retained. DEFAULT: `substantive`.
-2. `printTypes`: a boolean, wether or not to print the variant location type (`app/@type`) as the first column.
+2. `printTypes`: a boolean, wether or not to print the variant location type (`app/@type`) as the first column. DEFAULT: `false()`
 
 The stylesheet outputs two documents:
 
