@@ -12,13 +12,11 @@ as csv.
 
 The stylesheet as three parameters:
 
-1. `appTypes`: a sequence of strings containing the `app/@type` to be retained. DEFAULT: `substantive`.
+1. `appTypes`: a sequence of strings containing the `app/@type` to be retained. Set to empty (`''`) for no selection at all. DEFAULT: `substantive`.
 2. `printTypes`: a boolean, wether or not to print the variant location type (`app/@type`) as the first column. DEFAULT: `false()`
 
-The stylesheet outputs two documents:
-
-- `filename.csv`, the document to be imported in `stemmatology`;
-- `filename-varText.csv`, the same, but with the text of each variant in its cell (for reference purpose).
+The stylesheet outputs a document:
+- `filename.csv`, the document to be imported in `stemmatology`.
 
 Note that if variant locations (`app`) have an `@xml:id`, it will be used as their identifier.
 Otherwise, an id will be assigned (based on order in the document).
