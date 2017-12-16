@@ -1,6 +1,10 @@
 # stemmatology-utils
 Utils and conversion tools for the R stemmatology package.
 
+[![Travis-CI Build Status](https://travis-ci.org/Jean-Baptiste-Camps/stemmatology-utils.svg?branch=master)](https://travis-ci.org/Jean-Baptiste-Camps/stemmatology-utils)
+[![Coverage Status](https://codecov.io/gh/Jean-Baptiste-Camps/stemmatology-utils/branch/master/graph/badge.svg)](https://codecov.io/gh/Jean-Baptiste-Camps/stemmatology-utils)
+
+
 ⚠ This is not the main repository of the package, available at: 
 [https://github.com/Jean-Baptiste-Camps/stemmatology](https://github.com/Jean-Baptiste-Camps/stemmatology)
 
