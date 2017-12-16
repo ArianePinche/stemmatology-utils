@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    xmlns:tei="http://www.tei-c.org/ns/1.0"
+    stylesheet="../TEI-parallel-app_to_CSV.xsl" xslt-version="2.0">
+    
+    <!-- Testing global output and first parameter -->
+    <x:scenario 
+        label="Scenario for global test on Yvain sample with all types of variation">
+        <x:context href="Yvain.xml">
+            <x:param name="appTypes" select="''"></x:param>
+        </x:context>
+        <x:expect label="Yvain all types">;H;P;L;G;A;V;R;S;F;M;An;Br&#xA;VL_3686.1;1;1;NA;2;1;1;1;1;1;1;NA;NA&#xA;VL_3686.1.1;1;1;NA;NA;1;1;1;1;0;1;NA;NA&#xA;VL_3686.2;2;1;NA;2;2;2;2;2;2;2;NA;NA&#xA;VL_3686.2.1;0;NA;NA;1;1;1;1;1;1;1;NA;NA&#xA;VL_3686.3;1;1;NA;1;1;1;1;1;1;2;NA;NA&#xA;VL_3686.4;1;0;NA;0;0;0;0;0;0;0;NA;NA&#xA;VL_3686.5;0;0;NA;1;0;0;0;0;2;0;NA;NA&#xA;</x:expect>
+    </x:scenario>
+    
+    <!-- LIMIT OF XSPEC MAKES ALL THIS FURTHER TESTING IMPOSSIBLE AS OF NOW (6/12/2017):
+    
+    «With the current implementation, it isn't possible to have different scenarios use different values for global parameters. 
+    https://github.com/expath/xspec/wiki/Writing-Scenarios#expectations
+    -->
+    
+    <x:scenario pending="Not yet possible in XSpec"
+        label="Scenario for global test on Yvain sample with a selection of variation">
+        <x:context href="Yvain.xml">
+            <x:param name="appTypes" select="('graphic','functionWord')"></x:param>
+        </x:context>
+        <x:expect label="Yvain sample types (graphic, functionWord)">;H;P;L;G;A;V;R;S;F;M;An;Br&#xA;VL_3686.1;1;1;NA;2;1;1;1;1;1;1;NA;NA&#xA;VL_3686.2;2;1;NA;2;2;2;2;2;2;2;NA;NA&#xA;VL_3686.3;1;1;NA;1;1;1;1;1;1;2;NA;NA&#xA;VL_3686.4;1;0;NA;0;0;0;0;0;0;0;NA;NA&#xA;VL_3686.5;0;0;NA;1;0;0;0;0;2;0;NA;NA&#xA;</x:expect>
+    </x:scenario>
+    
+    <x:scenario pending="Not yet possible in XSpec"
+        label="Scenario for global test on Yvain sample with default selection (substantive)">
+        <x:context href="Yvain.xml"/>
+        <x:expect label="Yvain default selection">;H;P;L;G;A;V;R;S;F;M;An;Br&#xA;VL_3686.2.1;0;NA;NA;1;1;1;1;1;1;1;NA;NA&#xA;</x:expect>
+    </x:scenario>
+    
+    <!-- Testing the second parameter -->
+    
+    <x:scenario pending="Not yet possible in XSpec"
+        label="Scenario for global test on Yvain sample with all types of variation and variant types">
+        <x:context href="Yvain.xml">
+            <x:param name="appTypes" select="''"></x:param>
+            <x:param name="printTypes" select="true()"></x:param>
+        </x:context>
+        <x:expect label="Yvain all types and types printed">;VariantType;H;P;L;G;A;V;R;S;F;M;An;Br&#xA;VL_3686.1;functionWord;1;1;NA;2;1;1;1;1;1;1;NA;NA&#xA;VL_3686.1.1;;1;1;NA;NA;1;1;1;1;0;1;NA;NA&#xA;VL_3686.2;graphic;2;1;NA;2;2;2;2;2;2;2;NA;NA&#xA;VL_3686.2.1;substantive;0;NA;NA;1;1;1;1;1;1;1;NA;NA&#xA;VL_3686.3;graphic;1;1;NA;1;1;1;1;1;1;2;NA;NA&#xA;VL_3686.4;functionWord;1;0;NA;0;0;0;0;0;0;0;NA;NA&#xA;VL_3686.5;functionWord;0;0;NA;1;0;0;0;0;2;0;NA;NA&#xA;</x:expect>
+    </x:scenario>
+    
+
+    <x:scenario label="Scenario for testing template with match 'tei:listWit">
+        <x:context href="Yvain.xml" select="/descendant::tei:listWit"/>
+        <x:expect label="Yvain listWit">;H;P;L;G;A;V;R;S;F;M;An;Br&#xA;</x:expect>
+    </x:scenario>
+
+    <x:scenario label="Scenario for testing a single tei:app">
+        <x:context href="Yvain.xml" select="/descendant::tei:app[1]"/>
+        <x:expect label="Yvain app[1] output">VL_3686.1;1;1;NA;2;1;1;1;1;1;1;NA;NA&#xA;</x:expect>
+    </x:scenario>
+</x:description>

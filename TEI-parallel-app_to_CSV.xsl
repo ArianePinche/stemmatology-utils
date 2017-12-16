@@ -2,6 +2,9 @@
 <!--teiAppToCsv-->
 <!--Extracts a table of substantive variant locations from a TEI encoded apparatus  -->
 <!--todo:
+    JE VIENS DE MODIFIER LA FEUILLE POUR RESTREINDRE À UNE SEULE SORTIE,
+    ADAPTER AILLEURS ET SIMPLIFIER CODE
+    
     X créer un paramètre de scope global pour sélectionner les types de lieux variants à retenir (defaults to substantive);
         X On pourrait faire une première colonne dans le tableau en sortie pour indiquer le type de variation pour chaque variante (pourquoi pas avec un paramètre) 
     X créer un paramètre permettant de choisir si on veut ou non l'affichage du texte en sortie;
@@ -26,8 +29,8 @@
     To retain all variants, use the empty string ''-->
     <xsl:param 
         name="appTypes" 
-        as="xs:string"  
-        select="'substantive'"/>
+        as="xs:string+"  
+        select="''"/>
     
     <!-- Second global parameter: wether if we should display text or just the number of each variant (defaults to false) -->
     <!--<xsl:param name="withText" as="xs:boolean" select="false()"/>-->
@@ -51,29 +54,30 @@
             <!-- Soit elle ne l'est pas, et on teste les différents types -->
             <xsl:otherwise>
                 <!-- On crée une séquence à partir des types séparés par des virgules               -->
-                <xsl:variable name="tokenizedTypes" select="tokenize($appTypes, ' ')"/>
-                <xsl:apply-templates select="/descendant::tei:app[@type = $tokenizedTypes]"/>
+                <!--<xsl:variable name="tokenizedTypes" select="tokenize($appTypes, ' ')"/>-->
+                <xsl:apply-templates select="/descendant::tei:app[@type = $appTypes]"/>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:result-document href="{$filename}-varText.csv">
-            <!-- Le second, qui écrit la ligne d'entête à partir de la <listWit> (N.B.: on utilise // car on ne sait pas où sera la listWit (dans le front ou dans le sourceDesc?) -->
+        <!-- For testing purposes -->
+        <!--<xsl:result-document href="{$filename}-varText.csv">
+            <!-\- Le second, qui écrit la ligne d'entête à partir de la <listWit> (N.B.: on utilise // car on ne sait pas où sera la listWit (dans le front ou dans le sourceDesc?) -\->
             <xsl:apply-templates select="/descendant::tei:listWit"/>
-            <!-- Le troisième, qui traite les lieux variants proprement dits -->
+            <!-\- Le troisième, qui traite les lieux variants proprement dits -\->
             <xsl:choose>
-                <!-- Soit la chaîne est vide, et on retient tout -->
+                <!-\- Soit la chaîne est vide, et on retient tout -\->
                 <xsl:when test="$appTypes = '' ">
                     <xsl:apply-templates select="/descendant::tei:app"/>
                 </xsl:when>
-                <!-- Soit elle ne l'est pas, et on teste les différents types -->
+                <!-\- Soit elle ne l'est pas, et on teste les différents types -\->
                 <xsl:otherwise>
-                    <!-- On crée une séquence à partir des types séparés par des virgules               -->
+                    <!-\- On crée une séquence à partir des types séparés par des virgules               -\->
                     <xsl:variable name="tokenizedTypes" select="tokenize($appTypes, ' ')"/>
                     <xsl:apply-templates select="/descendant::tei:app[@type = $tokenizedTypes]">
                         <xsl:with-param name="withText" select="true()"/>
                     </xsl:apply-templates>
                 </xsl:otherwise>
             </xsl:choose>
-        </xsl:result-document>
+        </xsl:result-document>-->
     </xsl:template>
 
     <xsl:template match="tei:listWit">
